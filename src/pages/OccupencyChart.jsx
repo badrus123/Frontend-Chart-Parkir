@@ -97,7 +97,7 @@ export default function OccupencyChart() {
                 Occupency500,
               ]}
               type='donut'
-              width='780'
+              maxWidth='780'
             />
           </Paper>
         </Grid>

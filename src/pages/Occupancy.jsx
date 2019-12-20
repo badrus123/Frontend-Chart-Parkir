@@ -39,7 +39,7 @@ export default function Occupancy(props) {
     }
     sumOcupency = sumOcupency + data
     record.push(val.no)
-    tempat.push(parseInt(data))
+    tempat.push(data)
   })
   let meanOcupency = sumOcupency / props.rata
 
