@@ -89,6 +89,7 @@ export default function OccupencyChart() {
             <Chart
               options={donut.options}
               series={[
+                Occupency50,
                 Occupency100,
                 Occupency150,
                 Occupency200,
