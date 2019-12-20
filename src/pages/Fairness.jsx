@@ -47,7 +47,7 @@ export default function Occupancy(props) {
       curve: 'smooth',
     },
     title: {
-      text: 'Average High & Low Temperature',
+      text: 'Fairness Biaya VIP dan Reguler',
       align: 'left',
     },
     grid: {
