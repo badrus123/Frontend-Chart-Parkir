@@ -28,8 +28,61 @@ export default function OccupencyChart() {
   const [Occupency500, setOccupency500] = React.useState(0)
 
   const [donut, setDonut] = React.useState({
-    options: {},
-    Occupancy: [
+    options: {
+      labels: [
+        'Occupency Data 50',
+        'Occupency Data 100',
+        'Occupency Data 150',
+        'Occupency Data 200',
+        'Occupency Data 300',
+        'Occupency Data 500',
+      ],
+      dataLabels: {
+        dropShadow: {
+          blur: 3,
+          opacity: 0.8,
+        },
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                showAlways: true,
+                show: true,
+              },
+            },
+          },
+        },
+      },
+      states: {
+        hover: {
+          enabled: false,
+        },
+      },
+      theme: {
+        palette: 'palette2',
+      },
+      title: {
+        text: 'Occupancy Total',
+        align: 'center',
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    },
+    series: [
       Occupency50,
       Occupency100,
       Occupency150,
@@ -81,11 +134,8 @@ export default function OccupencyChart() {
             donut={setOccupency500}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} style={{ marginTop: '10px' }}>
           <Paper className={classes.root}>
-            <Typography variant='h5' component='h3'>
-              Occupancy Total
-            </Typography>
             <Chart
               options={donut.options}
               series={[
@@ -97,7 +147,7 @@ export default function OccupencyChart() {
                 Occupency500,
               ]}
               type='donut'
-              maxWidth='780'
+              maxWidth='580'
             />
           </Paper>
         </Grid>

@@ -58,7 +58,7 @@ export default function Occupancy(props) {
 
   return (
     <Paper className={classes.root}>
-      <Chart options={options} series={series} type='line' width='700' />
+      <Chart options={options} series={series} type='line' width='500' />
     </Paper>
   )
 }
