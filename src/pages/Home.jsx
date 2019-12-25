@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Chart from 'react-apexcharts'
 import { data150 } from '../data/Data150'
 import MaterialTable from 'material-table'
+import { dataPerform } from '../data/DataPerform'
 
 const useStyles = makeStyles(theme => ({
   rootPaper: {
@@ -118,159 +119,176 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
   const classes = useStyles()
+  let Xrecord = []
+  let YDelay = []
+  const harga = []
+  const vip = []
+  const reg = []
+  let hargaVIP = 0
+  let hargaReg = 0
+  data150.map(val => {
+    harga.push(parseInt(val.biaya))
+    if (val.jenis_parkir === 'reg') {
+      hargaReg = hargaReg + parseInt(val.biaya)
+      reg.push(parseInt(val.biaya))
+    }
+    if (val.jenis_parkir === 'vip') {
+      hargaVIP = hargaVIP + parseInt(val.biaya)
+      vip.push(parseInt(val.biaya))
+    }
+  })
+
+  dataPerform.map(v => {
+    Xrecord.push(v.rate_kedatangan)
+    YDelay.push(parseInt(v.avg_delay))
+  })
   const pieHarga = {
-    options: {
-      labels: ['Reguler', 'VIP'],
-      dataLabels: {
-        dropShadow: {
-          blur: 3,
-          opacity: 0.8,
-        },
+    labels: ['Reguler', 'VIP'],
+    dataLabels: {
+      dropShadow: {
+        blur: 3,
+        opacity: 0.8,
       },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                showAlways: true,
-                show: true,
-              },
-            },
-          },
-        },
-      },
-      states: {
-        hover: {
-          enabled: false,
-        },
-      },
-      theme: {
-        palette: 'palette2',
-      },
-      title: {
-        text: 'Fairness Revenue VIP dan Reguler',
-        align: 'center',
-      },
-      responsive: [
-        {
-          breakpoint: 1000,
-          options: {
-            plotOptions: {
-              bar: {
-                horizontal: false,
-              },
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
     },
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              showAlways: true,
+              show: true,
+            },
+          },
+        },
+      },
+    },
+    states: {
+      hover: {
+        enabled: false,
+      },
+    },
+    theme: {
+      palette: 'palette2',
+    },
+    title: {
+      text: 'Fairness Revenue VIP dan Reguler',
+      align: 'center',
+    },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false,
+            },
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   }
   const pieTotal = {
-    options: {
-      labels: ['Reguler', 'VIP'],
-      dataLabels: {
-        dropShadow: {
-          blur: 3,
-          opacity: 0.8,
-        },
+    labels: ['Reguler', 'VIP'],
+    dataLabels: {
+      dropShadow: {
+        blur: 3,
+        opacity: 0.8,
       },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                showAlways: true,
-                show: true,
-              },
-            },
-          },
-        },
-      },
-      states: {
-        hover: {
-          enabled: false,
-        },
-      },
-      theme: {
-        palette: 'palette2',
-      },
-      title: {
-        text: 'Fairness Jumlah VIP dan Reguler',
-        align: 'center',
-      },
-      responsive: [
-        {
-          breakpoint: 1000,
-          options: {
-            plotOptions: {
-              bar: {
-                horizontal: false,
-              },
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
     },
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              showAlways: true,
+              show: true,
+            },
+          },
+        },
+      },
+    },
+    states: {
+      hover: {
+        enabled: false,
+      },
+    },
+    theme: {
+      palette: 'palette2',
+    },
+    title: {
+      text: 'Fairness Jumlah VIP dan Reguler',
+      align: 'center',
+    },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false,
+            },
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   }
+
   const linePerform = {
-    options: {
-      labels: ['Reguler', 'VIP'],
-      dataLabels: {
-        dropShadow: {
-          blur: 3,
-          opacity: 0.8,
-        },
+    chart: {
+      stacked: false,
+      zoom: {
+        type: 'x',
+        enabled: true,
+        autoScaleYaxis: true,
       },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                showAlways: true,
-                show: true,
-              },
+      toolbar: {
+        autoSelected: 'zoom',
+      },
+    },
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: 'straight',
+    },
+    title: {
+      text: `Performace`,
+      align: 'left',
+    },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5,
+      },
+    },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: true,
             },
+          },
+          legend: {
+            position: 'bottom',
           },
         },
       },
-      states: {
-        hover: {
-          enabled: false,
-        },
-      },
-      theme: {
-        palette: 'palette2',
-      },
-      title: {
-        text: 'Fairness Jumlah VIP dan Reguler',
-        align: 'center',
-      },
-      responsive: [
-        {
-          breakpoint: 1000,
-          options: {
-            plotOptions: {
-              bar: {
-                horizontal: false,
-              },
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
+    ],
+    xaxis: {
+      categories: Xrecord,
     },
   }
+
   return (
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
@@ -331,7 +349,7 @@ export default function Home() {
             <Paper className={classes.root}>
               <Chart
                 options={pieHarga}
-                series={[30, 40]}
+                series={[hargaReg, hargaVIP]}
                 type='pie'
                 className={classes.chartPie}
               />
@@ -341,7 +359,7 @@ export default function Home() {
             <Paper className={classes.root}>
               <Chart
                 options={pieTotal}
-                series={[30, 40]}
+                series={[reg.length, vip.length]}
                 type='pie'
                 className={classes.chartPie}
               />
@@ -351,7 +369,12 @@ export default function Home() {
             <Paper className={classes.root}>
               <Chart
                 options={linePerform}
-                series={[30, 40]}
+                series={[
+                  {
+                    name: 'performance',
+                    data: YDelay,
+                  },
+                ]}
                 type='line'
                 className={classes.chartLine}
               />

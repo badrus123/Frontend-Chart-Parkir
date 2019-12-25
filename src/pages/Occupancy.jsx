@@ -105,6 +105,9 @@ export default function Occupancy(props) {
         },
       },
     ],
+    xaxis: {
+      categories: record,
+    },
   }
   const series = [
     {
