@@ -43,6 +43,7 @@ export default function Occupancy(props) {
       zoom: {
         enabled: true,
       },
+      id: 'record',
     },
     dataLabels: {
       enabled: false,
@@ -59,9 +60,6 @@ export default function Occupancy(props) {
         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
         opacity: 0.5,
       },
-    },
-    chart: {
-      id: 'record',
     },
     xaxis: {
       categories: record,

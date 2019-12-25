@@ -1,7 +1,6 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -67,6 +66,7 @@ export default function Occupancy(props) {
       zoom: {
         enabled: true,
       },
+      id: 'record',
     },
     dataLabels: {
       enabled: false,
@@ -84,9 +84,7 @@ export default function Occupancy(props) {
         opacity: 0.5,
       },
     },
-    chart: {
-      id: 'record',
-    },
+
     xaxis: {
       categories: record,
     },

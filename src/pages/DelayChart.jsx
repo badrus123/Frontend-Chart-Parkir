@@ -1,9 +1,6 @@
 import React from 'react'
 import { data50 } from '../data/Data50'
 import { data100 } from '../data/Data100'
-import { data300 } from '../data/Data300'
-import { data500 } from '../data/Data500'
-import { data200 } from '../data/Data200'
 import { data150 } from '../data/Data150'
 import { Grid } from '@material-ui/core'
 import Delay from './Delay'
@@ -20,16 +17,6 @@ export default function DelayChart() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Delay dataOccupancy={data150} rata={150} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data200} rata={200} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data300} rata={300} />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data500} rata={500} />
         </Grid>
       </Grid>
     </div>
