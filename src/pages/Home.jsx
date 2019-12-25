@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Paper, Grid, Icon, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Chart from 'react-apexcharts'
+import { data150 } from '../data/Data150'
+import MaterialTable from 'material-table'
 
 const useStyles = makeStyles(theme => ({
   rootPaper: {
@@ -76,7 +78,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: '100px',
     },
   },
-  chart: {
+  chartPie: {
     [theme.breakpoints.down('sm')]: {
       width: '300px',
     },
@@ -87,13 +89,38 @@ const useStyles = makeStyles(theme => ({
       width: '700px',
     },
   },
+  chartLine: {
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '1500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '1700px',
+    },
+  },
+  table: {
+    [theme.breakpoints.down('sm')]: {
+      width: '350px',
+      marginTop: '30px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '1500px',
+      marginTop: '30px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '1700px',
+      marginTop: '30px',
+    },
+  },
 }))
 
 export default function Home() {
   const classes = useStyles()
-  const [donut, setDonut] = React.useState({
+  const pieHarga = {
     options: {
-      labels: ['Occupency Data 50', 'Occupency Data 100', 'Occupency Data 150'],
+      labels: ['Reguler', 'VIP'],
       dataLabels: {
         dropShadow: {
           blur: 3,
@@ -122,7 +149,7 @@ export default function Home() {
         palette: 'palette2',
       },
       title: {
-        text: 'Occupancy Total',
+        text: 'Fairness Revenue VIP dan Reguler',
         align: 'center',
       },
       responsive: [
@@ -141,12 +168,114 @@ export default function Home() {
         },
       ],
     },
-  })
+  }
+  const pieTotal = {
+    options: {
+      labels: ['Reguler', 'VIP'],
+      dataLabels: {
+        dropShadow: {
+          blur: 3,
+          opacity: 0.8,
+        },
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                showAlways: true,
+                show: true,
+              },
+            },
+          },
+        },
+      },
+      states: {
+        hover: {
+          enabled: false,
+        },
+      },
+      theme: {
+        palette: 'palette2',
+      },
+      title: {
+        text: 'Fairness Jumlah VIP dan Reguler',
+        align: 'center',
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false,
+              },
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    },
+  }
+  const linePerform = {
+    options: {
+      labels: ['Reguler', 'VIP'],
+      dataLabels: {
+        dropShadow: {
+          blur: 3,
+          opacity: 0.8,
+        },
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                showAlways: true,
+                show: true,
+              },
+            },
+          },
+        },
+      },
+      states: {
+        hover: {
+          enabled: false,
+        },
+      },
+      theme: {
+        palette: 'palette2',
+      },
+      title: {
+        text: 'Fairness Jumlah VIP dan Reguler',
+        align: 'center',
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false,
+              },
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    },
+  }
   return (
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={3}>
+          <Grid xs={12} sm={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -163,7 +292,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={3}>
+          <Grid xs={12} sm={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -180,11 +309,11 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={3}>
+          <Grid xs={12} sm={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
-                  <Icon className={classes.iconPaper}>show_chart</Icon>
+                  <Icon className={classes.iconPaper}>monetization_on</Icon>
                 </Grid>
                 <Grid item xs={6}>
                   <Typography variant={'h6'} className={classes.titlePaper}>
@@ -197,45 +326,80 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={3}>
-            <Paper className={classes.rootPaper}>
-              <Grid container spacing={2}>
-                <Grid item xs={4}>
-                  <Icon className={classes.iconPaper}>monetization_on</Icon>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant={'h6'} className={classes.titlePaper}>
-                    Vr Mail
-                  </Typography>
-                  <Typography variant={'p'} className={classes.descPaper}>
-                    15 C
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
+
           <Grid item xs={12} sm={6} style={{ marginTop: '10px' }}>
             <Paper className={classes.root}>
               <Chart
-                options={donut.options}
-                series={[30, 40, 30]}
-                type='donut'
-                className={classes.chart}
+                options={pieHarga}
+                series={[30, 40]}
+                type='pie'
+                className={classes.chartPie}
               />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} style={{ marginTop: '10px' }}>
             <Paper className={classes.root}>
               <Chart
-                options={donut.options}
-                series={[30, 40, 30]}
+                options={pieTotal}
+                series={[30, 40]}
+                type='pie'
+                className={classes.chartPie}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={12} style={{ marginTop: '10px' }}>
+            <Paper className={classes.root}>
+              <Chart
+                options={linePerform}
+                series={[30, 40]}
                 type='line'
-                className={classes.chart}
+                className={classes.chartLine}
               />
             </Paper>
           </Grid>
         </Grid>
       </div>
+      <center>
+        <div className={classes.table}>
+          <MaterialTable
+            columns={[
+              { title: 'Nomer Kendaraan', field: 'no_kend' },
+              { title: 'Nomer Parkiran', field: 'no_parkiran' },
+              {
+                title: 'jenis parkiran',
+                field: 'jenis_parkir',
+                lookup: { reg: 'reg', vip: 'vip' },
+              },
+              {
+                title: 'Waktu Datang',
+                field: 'waktu_datang',
+              },
+              {
+                title: 'Waktu Dapat Parkir',
+                field: 'waktu_dpt_parkir',
+              },
+              {
+                title: 'Waktu Keluar',
+                field: 'waktu_keluar',
+              },
+              {
+                title: 'Biaya Parkir',
+                field: 'biaya',
+              },
+            ]}
+            data={data150}
+            options={{
+              search: true,
+              width: '250px',
+              rowStyle: {
+                backgroundColor: '#EEE',
+              },
+              sorting: true,
+            }}
+            title='Table User Parkir'
+          />
+        </div>
+      </center>
     </div>
   )
 }

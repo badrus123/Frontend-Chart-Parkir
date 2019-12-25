@@ -34,16 +34,23 @@ export default function Occupancy(props) {
   const harga = []
   const vip = []
   const reg = []
-
+  let hargaVIP = 0
+  let hargaReg = 0
   props.dataOccupancy.map(val => {
     harga.push(parseInt(val.biaya))
     if (val.jenis_parkir === 'reg') {
+      hargaReg = hargaReg + parseInt(val.biaya)
       reg.push(parseInt(val.biaya))
     }
     if (val.jenis_parkir === 'vip') {
+      hargaVIP = hargaVIP + parseInt(val.biaya)
       vip.push(parseInt(val.biaya))
     }
   })
+  console.log('harga reguler', hargaReg)
+  console.log('harga vip', hargaVIP)
+  console.log('banyak reguler', reg.length)
+  console.log('banyak vip', vip.length)
   const options = {
     chart: {
       shadow: {

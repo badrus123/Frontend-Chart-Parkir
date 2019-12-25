@@ -7,18 +7,20 @@ import Delay from './Delay'
 
 export default function DelayChart() {
   return (
-    <div style={{ flexGrow: 1, margin: '50px' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data50} rata={50} />
+    <div style={{ flexGrow: 1, marginTop: '50px' }}>
+      <center>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Delay dataOccupancy={data50} rata={50} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Delay dataOccupancy={data100} rata={100} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Delay dataOccupancy={data150} rata={150} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data100} rata={100} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Delay dataOccupancy={data150} rata={150} />
-        </Grid>
-      </Grid>
+      </center>
     </div>
   )
 }

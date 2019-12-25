@@ -40,13 +40,18 @@ export default function Occupancy(props) {
   })
   const options = {
     chart: {
+      stacked: false,
       zoom: {
+        type: 'x',
         enabled: true,
+        autoScaleYaxis: true,
       },
-      id: 'record',
+      toolbar: {
+        autoSelected: 'zoom',
+      },
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
     stroke: {
       curve: 'straight',

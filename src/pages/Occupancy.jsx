@@ -38,6 +38,7 @@ export default function Occupancy(props) {
   let temp = 0
   let data = 0
   let sumOcupency = 0
+
   props.dataOccupancy.map(val => {
     slotParkiran.push(val.no_parkiran)
     let dataFilter = props.dataOccupancy.filter(
@@ -56,27 +57,32 @@ export default function Occupancy(props) {
       temp = data
     }
     sumOcupency = sumOcupency + data
-    record.push(val.no)
-    tempat.push(data)
+    record.push(parseInt(val.no))
+    tempat.push(parseInt(data))
   })
   let meanOcupency = sumOcupency / props.rata
 
   const options = {
     chart: {
+      stacked: false,
       zoom: {
+        type: 'x',
         enabled: true,
+        autoScaleYaxis: true,
       },
-      id: 'record',
+      toolbar: {
+        autoSelected: 'zoom',
+      },
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
     stroke: {
       curve: 'straight',
     },
     title: {
-      text: `Occupancy Data ${props.rata} dengan Rata Rata ${meanOcupency} %`,
-      align: 'center',
+      text: `Occupancy Data ${props.rata}`,
+      align: 'left',
     },
     grid: {
       row: {
@@ -84,17 +90,13 @@ export default function Occupancy(props) {
         opacity: 0.5,
       },
     },
-
-    xaxis: {
-      categories: record,
-    },
     responsive: [
       {
         breakpoint: 1000,
         options: {
           plotOptions: {
             bar: {
-              horizontal: false,
+              horizontal: true,
             },
           },
           legend: {
@@ -106,7 +108,7 @@ export default function Occupancy(props) {
   }
   const series = [
     {
-      name: 'tempat terisi',
+      name: 'Occupancy / car',
       data: tempat,
     },
   ]
@@ -117,7 +119,7 @@ export default function Occupancy(props) {
       <Chart
         options={options}
         series={series}
-        type='line'
+        type='area'
         className={classes.chart}
       />
     </Paper>
