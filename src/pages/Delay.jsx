@@ -1,13 +1,31 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '700px',
-    marginTop: '30px',
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '700px',
+    },
+    marginTop: '50px',
+  },
+  chart: {
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '700px',
+    },
   },
 }))
 
@@ -48,6 +66,21 @@ export default function Occupancy(props) {
     xaxis: {
       categories: record,
     },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false,
+            },
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   }
   const series = [
     {
@@ -58,7 +91,12 @@ export default function Occupancy(props) {
 
   return (
     <Paper className={classes.root}>
-      <Chart options={options} series={series} type='line' width='500' />
+      <Chart
+        options={options}
+        series={series}
+        type='line'
+        className={classes.chart}
+      />
     </Paper>
   )
 }

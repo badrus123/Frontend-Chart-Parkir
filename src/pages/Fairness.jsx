@@ -5,8 +5,27 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '700px',
-    marginTop: '30px',
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '700px',
+    },
+    marginTop: '50px',
+  },
+  chart: {
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '700px',
+    },
   },
 }))
 
@@ -78,6 +97,21 @@ export default function Occupancy(props) {
       offsetY: -25,
       offsetX: -5,
     },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false,
+            },
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   }
   const series = [
     {
@@ -91,7 +125,12 @@ export default function Occupancy(props) {
   ]
   return (
     <Paper className={classes.root}>
-      <Chart options={options} series={series} type='line' width='1000' />
+      <Chart
+        options={options}
+        series={series}
+        type='line'
+        className={classes.chart}
+      />
     </Paper>
   )
 }

@@ -14,10 +14,19 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
+import Icon from '@material-ui/core/Icon'
 
 const useStyles = makeStyles(theme => ({
   list: {
-    width: 350,
+    [theme.breakpoints.down('sm')]: {
+      width: 200,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 250,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 350,
+    },
   },
   fullList: {
     width: 'auto',
@@ -30,6 +39,28 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+  },
+  appbar: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '100%',
+    },
+  },
+  textList: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '14px',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '16px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '18px',
+    },
   },
 }))
 
@@ -62,38 +93,36 @@ function DrawerHeader() {
     >
       <List>
         <center>
-          <h1>Parkir</h1>
+          <h1 className={classes.textList}>Parkir</h1>
         </center>
         <Divider />
         <ListItem button component={Link} to='/'>
           <ListItemIcon>
-            <SvgIcon>
-              <path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' />
-            </SvgIcon>
+            <Icon>dashboard</Icon>
           </ListItemIcon>
-          <ListItemText primary={'Occpency Chart'} />
+          <ListItemText primary={'Dashboard'} classes={classes.textList} />
+        </ListItem>
+        <ListItem button component={Link} to='/occupancy-chart'>
+          <ListItemIcon>
+            <Icon>show_chart</Icon>
+          </ListItemIcon>
+          <ListItemText primary={'Occpency Chart'} classes={classes.textList} />
         </ListItem>
         <ListItem button component={Link} to='/delay-chart'>
           <ListItemIcon>
-            <SvgIcon>
-              <path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' />
-            </SvgIcon>
+            <Icon>pie_chart</Icon>
           </ListItemIcon>
           <ListItemText primary={'Delay Chart'} />
         </ListItem>
         <ListItem button component={Link} to='/fairness-chart'>
           <ListItemIcon>
-            <SvgIcon>
-              <path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' />
-            </SvgIcon>
+            <Icon>insert_chart</Icon>
           </ListItemIcon>
           <ListItemText primary={'Fairness Grafik'} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <SvgIcon>
-              <path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' />
-            </SvgIcon>
+            <Icon>table_chart</Icon>
           </ListItemIcon>
           <ListItemText primary={'Fairness Tabel'} />
         </ListItem>
@@ -103,7 +132,7 @@ function DrawerHeader() {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='static' className={classes.appbar}>
         <Toolbar>
           <IconButton
             edge='start'
