@@ -338,7 +338,7 @@ export default function Home() {
                     Total User
                   </Typography>
                   <Typography variant={'p'} className={classes.descPaper}>
-                    18 0000 +
+                    150 ++
                   </Typography>
                 </Grid>
               </Grid>
@@ -372,7 +372,7 @@ export default function Home() {
                     Revenue
                   </Typography>
                   <Typography variant={'p'} className={classes.descPaper}>
-                    Rp 18 M
+                    Rp {hargaReg + hargaVIP}
                   </Typography>
                 </Grid>
               </Grid>

@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
       width: '500px',
     },
     [theme.breakpoints.up('lg')]: {
+      width: '600px',
+    },
+    [theme.breakpoints.up('xl')]: {
       width: '700px',
     },
   },
@@ -28,6 +31,9 @@ const useStyles = makeStyles(theme => ({
       width: '500px',
     },
     [theme.breakpoints.up('lg')]: {
+      width: '600px',
+    },
+    [theme.breakpoints.up('xl')]: {
       width: '700px',
     },
   },
