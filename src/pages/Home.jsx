@@ -15,7 +15,10 @@ const useStyles = makeStyles(theme => ({
       width: '500px',
     },
     [theme.breakpoints.up('lg')]: {
-      width: '420px',
+      width: '500px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: '700px',
     },
   },
   rootPaper: {
@@ -30,7 +33,11 @@ const useStyles = makeStyles(theme => ({
       height: '70px',
     },
     [theme.breakpoints.up('lg')]: {
-      width: '420px',
+      width: '300px',
+      height: '100px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: '550px',
       height: '100px',
     },
   },
@@ -89,6 +96,12 @@ const useStyles = makeStyles(theme => ({
       gridGap: '30px',
       paddingLeft: '100px',
     },
+    [theme.breakpoints.up('xl')]: {
+      display: 'grid',
+      gridTemplateColumns: 'auto auto auto auto',
+      gridGap: '30px',
+      paddingLeft: '100px',
+    },
   },
   chartPie: {
     [theme.breakpoints.down('sm')]: {
@@ -98,6 +111,9 @@ const useStyles = makeStyles(theme => ({
       width: '400px',
     },
     [theme.breakpoints.up('lg')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('xl')]: {
       width: '700px',
     },
   },
@@ -109,6 +125,9 @@ const useStyles = makeStyles(theme => ({
       width: '1000px',
     },
     [theme.breakpoints.up('lg')]: {
+      width: '1100px',
+    },
+    [theme.breakpoints.up('xl')]: {
       width: '1700px',
     },
   },
@@ -122,6 +141,10 @@ const useStyles = makeStyles(theme => ({
       marginTop: '30px',
     },
     [theme.breakpoints.up('lg')]: {
+      width: '1100px',
+      marginTop: '30px',
+    },
+    [theme.breakpoints.up('xl')]: {
       width: '1700px',
       marginTop: '30px',
     },
