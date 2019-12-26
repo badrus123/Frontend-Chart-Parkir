@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import OccupencyChart from './pages/OccupencyChart'
 import Drawer from './component/drawer/DrawerHeader'
 import DelayChart from './pages/DelayChart'
-import FairnessChart from './pages/FairnessChart'
+import FairnessChart from './pages/Simulasi'
 import Home from './pages/Home'
 
 function App() {

@@ -7,6 +7,17 @@ import MaterialTable from 'material-table'
 import { dataPerform } from '../data/DataPerform'
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '500px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '420px',
+    },
+  },
   rootPaper: {
     [theme.breakpoints.down('sm')]: {
       width: '300px',
@@ -15,7 +26,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: '25px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '350px',
+      width: '300px',
       height: '70px',
     },
     [theme.breakpoints.up('lg')]: {
@@ -70,7 +81,7 @@ const useStyles = makeStyles(theme => ({
       display: 'grid',
       gridTemplateColumns: 'auto auto auto auto',
       gridGap: '10px',
-      paddingLeft: '10px',
+      paddingLeft: '50px',
     },
     [theme.breakpoints.up('lg')]: {
       display: 'grid',
@@ -84,7 +95,7 @@ const useStyles = makeStyles(theme => ({
       width: '300px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '500px',
+      width: '400px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '700px',
@@ -95,7 +106,7 @@ const useStyles = makeStyles(theme => ({
       width: '300px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '1500px',
+      width: '1000px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '1700px',
@@ -107,7 +118,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: '30px',
     },
     [theme.breakpoints.up('md')]: {
-      width: '1500px',
+      width: '1000px',
       marginTop: '30px',
     },
     [theme.breakpoints.up('lg')]: {
@@ -293,7 +304,7 @@ export default function Home() {
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={4}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -310,7 +321,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={4}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -327,7 +338,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={4}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -345,7 +356,7 @@ export default function Home() {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={6} style={{ marginTop: '10px' }}>
+          <Grid item xs={12} sm={6} md={6} style={{ marginTop: '10px' }}>
             <Paper className={classes.root}>
               <Chart
                 options={pieHarga}
@@ -355,7 +366,7 @@ export default function Home() {
               />
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={6} style={{ marginTop: '10px' }}>
+          <Grid item xs={12} sm={6} md={6} style={{ marginTop: '10px' }}>
             <Paper className={classes.root}>
               <Chart
                 options={pieTotal}
