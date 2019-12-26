@@ -21,6 +21,20 @@ const useStyles = makeStyles(theme => ({
       width: '700px',
     },
   },
+  rootLine: {
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '1000px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '1100px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: '1700px',
+    },
+  },
   rootPaper: {
     [theme.breakpoints.down('sm')]: {
       width: '300px',
@@ -400,7 +414,7 @@ export default function Home() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={12} style={{ marginTop: '10px' }}>
-            <Paper className={classes.root}>
+            <Paper className={classes.rootLine}>
               <Chart
                 options={linePerform}
                 series={[

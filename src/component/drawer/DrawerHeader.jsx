@@ -11,7 +11,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import Icon from '@material-ui/core/Icon'
 
@@ -113,17 +112,11 @@ function DrawerHeader() {
           </ListItemIcon>
           <ListItemText primary={'Delay Chart'} />
         </ListItem>
-        <ListItem button component={Link} to='/fairness-chart'>
+        <ListItem button component={Link} to='/simulasi'>
           <ListItemIcon>
-            <Icon>insert_chart</Icon>
+            <Icon>dynamic_feed</Icon>
           </ListItemIcon>
-          <ListItemText primary={'Fairness Grafik'} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <Icon>table_chart</Icon>
-          </ListItemIcon>
-          <ListItemText primary={'Fairness Tabel'} />
+          <ListItemText primary={'Simulation'} />
         </ListItem>
       </List>
     </div>
@@ -140,7 +133,7 @@ function DrawerHeader() {
             aria-label='menu'
             onClick={toggleDrawer('left', true)}
           >
-            <MenuIcon />
+            <Icon>menu</Icon>
           </IconButton>
           <Typography variant='h6' className={classes.title}>
             Parkir

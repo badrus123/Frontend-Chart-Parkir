@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import OccupencyChart from './pages/OccupencyChart'
 import Drawer from './component/drawer/DrawerHeader'
 import DelayChart from './pages/DelayChart'
-import FairnessChart from './pages/Simulasi'
+import Simulasi from './pages/SimulasiChart'
 import Home from './pages/Home'
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/occupancy-chart' component={OccupencyChart} />
         <Route exact path='/delay-chart' component={DelayChart} />
-        <Route exact path='/fairness-chart' component={FairnessChart} />
+        <Route exact path='/simulasi' component={Simulasi} />
       </Switch>
     </div>
   )
