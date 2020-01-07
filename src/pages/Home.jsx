@@ -366,7 +366,7 @@ export default function Home() {
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={3} md={3}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -383,24 +383,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={3} md={3}>
-            <Paper className={classes.rootPaper}>
-              <Grid container spacing={2}>
-                <Grid item xs={4}>
-                  <Icon className={classes.iconPaper}>bar_chart</Icon>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant={'h6'} className={classes.titlePaper}>
-                    Avaibiity
-                  </Typography>
-                  <Typography variant={'p'} className={classes.descPaper}>
-                    75 %
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid xs={12} sm={3} md={3}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -417,7 +400,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={3} md={3}>
+          <Grid xs={12} sm={4} md={4}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
