@@ -328,6 +328,10 @@ export default function AkumulasiParkir() {
                 title: 'Slot Isi',
                 field: 'isi',
               },
+              {
+                title: 'Occupancy (%)',
+                field: 'occupancy',
+              },
             ]}
             data={dataPerform}
             options={{
