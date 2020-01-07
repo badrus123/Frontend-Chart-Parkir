@@ -106,6 +106,12 @@ function DrawerHeader() {
           </ListItemIcon>
           <ListItemText primary={'Dashboard'} classes={classes.textList} />
         </ListItem>
+        <ListItem button component={Link} to='/akumulasi'>
+          <ListItemIcon>
+            <Icon>table</Icon>
+          </ListItemIcon>
+          <ListItemText primary={'Akumulasi'} classes={classes.textList} />
+        </ListItem>
       </List>
     </div>
   )
