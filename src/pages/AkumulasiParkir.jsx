@@ -290,7 +290,7 @@ export default function AkumulasiParkir() {
                 onClick={() => setOpen(true)}
               />
               <ImgsViewer
-                imgs={[]}
+                imgs={[{ src: Denah }]}
                 isOpen={open}
                 onClose={() => setOpen(false)}
               />
