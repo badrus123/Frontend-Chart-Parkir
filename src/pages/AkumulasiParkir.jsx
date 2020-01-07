@@ -320,6 +320,14 @@ export default function AkumulasiParkir() {
                 title: 'Total Keluar',
                 field: 'total_keluar',
               },
+              {
+                title: 'Slot kosong',
+                field: 'kosong',
+              },
+              {
+                title: 'Slot Isi',
+                field: 'isi',
+              },
             ]}
             data={dataPerform}
             options={{
