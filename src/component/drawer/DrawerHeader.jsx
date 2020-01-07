@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import { Link } from 'react-router-dom'
 import Icon from '@material-ui/core/Icon'
+import Cookies from 'js-cookie'
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -70,6 +71,11 @@ function DrawerHeader() {
     bottom: false,
     right: false,
   })
+  const Logout = () => {
+    Cookies.remove('_q')
+    Cookies.remove('expires')
+    window.location.reload()
+  }
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -100,24 +106,6 @@ function DrawerHeader() {
           </ListItemIcon>
           <ListItemText primary={'Dashboard'} classes={classes.textList} />
         </ListItem>
-        <ListItem button component={Link} to='/occupancy-chart'>
-          <ListItemIcon>
-            <Icon>show_chart</Icon>
-          </ListItemIcon>
-          <ListItemText primary={'Occpency Chart'} classes={classes.textList} />
-        </ListItem>
-        <ListItem button component={Link} to='/delay-chart'>
-          <ListItemIcon>
-            <Icon>pie_chart</Icon>
-          </ListItemIcon>
-          <ListItemText primary={'Delay Chart'} />
-        </ListItem>
-        <ListItem button component={Link} to='/simulasi'>
-          <ListItemIcon>
-            <Icon>dynamic_feed</Icon>
-          </ListItemIcon>
-          <ListItemText primary={'Simulation'} />
-        </ListItem>
       </List>
     </div>
   )
@@ -138,7 +126,9 @@ function DrawerHeader() {
           <Typography variant='h6' className={classes.title}>
             Parkir
           </Typography>
-          <Button color='inherit'>Login</Button>
+          <Button onClick={Logout} color='inherit'>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 

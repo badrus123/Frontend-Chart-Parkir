@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Paper, Grid, Icon, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Chart from 'react-apexcharts'
-import { data150 } from '../data/Data150'
 import MaterialTable from 'material-table'
-import { dataPerform } from '../data/DataPerform'
-
+import axios from 'axios'
+import { TOKEN } from '../utils'
 const useStyles = makeStyles(theme => ({
   root: {
     [theme.breakpoints.down('sm')]: {
@@ -174,21 +173,47 @@ export default function Home() {
   const reg = []
   let hargaVIP = 0
   let hargaReg = 0
-  data150.map(val => {
-    harga.push(parseInt(val.biaya))
-    if (val.jenis_parkir === 'reg') {
-      hargaReg = hargaReg + parseInt(val.biaya)
-      reg.push(parseInt(val.biaya))
+  const [dataParkir, setDataParkir] = useState(null)
+  const [dataPerform, setDataPerform] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      const DataParkir = await axios(
+        'https://api-parkiran.herokuapp.com/api/v1/get-all-parkiran',
+        { headers: { Authorization: `Bearer ${TOKEN}` } },
+      )
+      const DataPerform = await axios(
+        'https://api-parkiran.herokuapp.com/api/v1/get-performance',
+        { headers: { Authorization: `Bearer ${TOKEN}` } },
+      )
+      setDataParkir(DataParkir.data)
+      setDataPerform(DataPerform.data)
     }
-    if (val.jenis_parkir === 'vip') {
-      hargaVIP = hargaVIP + parseInt(val.biaya)
-      vip.push(parseInt(val.biaya))
+
+    fetchData()
+  }, [])
+  if (dataParkir === null) {
+    return <div>loading</div>
+  }
+  if (dataPerform === null) {
+    return <div>loading</div>
+  }
+  console.log(dataPerform)
+  dataParkir.map(val => {
+    harga.push(parseInt(val.harga_reservasi))
+    if (val.jenis_parkiran === 'REG') {
+      hargaReg = hargaReg + parseInt(val.harga_reservasi)
+      reg.push(parseInt(val.harga_reservasi))
+    }
+    if (val.jenis_parkiran === 'VIP') {
+      hargaVIP = hargaVIP + parseInt(val.harga_reservasi)
+      vip.push(parseInt(val.harga_reservasi))
     }
   })
 
   dataPerform.map(v => {
     Xrecord.push(v.rate_kedatangan)
-    YDelay.push(parseInt(v.avg_delay))
+    YDelay.push(v.rata_rata_delay_antrian)
   })
   const pieHarga = {
     labels: ['Reguler', 'VIP'],
@@ -341,7 +366,7 @@ export default function Home() {
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={4} md={4}>
+          <Grid xs={12} sm={3} md={3}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -352,13 +377,13 @@ export default function Home() {
                     Total User
                   </Typography>
                   <Typography variant={'p'} className={classes.descPaper}>
-                    150 ++
+                    800 ++
                   </Typography>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={4} md={4}>
+          <Grid xs={12} sm={3} md={3}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -375,7 +400,7 @@ export default function Home() {
               </Grid>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={4} md={4}>
+          <Grid xs={12} sm={3} md={3}>
             <Paper className={classes.rootPaper}>
               <Grid container spacing={2}>
                 <Grid item xs={4}>
@@ -387,6 +412,23 @@ export default function Home() {
                   </Typography>
                   <Typography variant={'p'} className={classes.descPaper}>
                     Rp {hargaReg + hargaVIP}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid xs={12} sm={3} md={3}>
+            <Paper className={classes.rootPaper}>
+              <Grid container spacing={2}>
+                <Grid item xs={4}>
+                  <Icon className={classes.iconPaper}>show_chart</Icon>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant={'h6'} className={classes.titlePaper}>
+                    Occupancy
+                  </Typography>
+                  <Typography variant={'p'} className={classes.descPaper}>
+                    9.52 %
                   </Typography>
                 </Grid>
               </Grid>
@@ -434,31 +476,30 @@ export default function Home() {
         <div className={classes.table}>
           <MaterialTable
             columns={[
-              { title: 'Nomer Kendaraan', field: 'no_kend' },
+              { title: 'nama', field: 'nama' },
               { title: 'Nomer Parkiran', field: 'no_parkiran' },
               {
                 title: 'jenis parkiran',
-                field: 'jenis_parkir',
-                lookup: { reg: 'reg', vip: 'vip' },
+                field: 'jenis_parkiran',
               },
               {
                 title: 'Waktu Datang',
-                field: 'waktu_datang',
+                field: 'jam_masuk',
               },
               {
                 title: 'Waktu Dapat Parkir',
-                field: 'waktu_dpt_parkir',
+                field: 'waktu_dapat_parkir',
               },
               {
                 title: 'Waktu Keluar',
-                field: 'waktu_keluar',
+                field: 'jam_keluar',
               },
               {
                 title: 'Biaya Parkir',
-                field: 'biaya',
+                field: 'harga_reservasi',
               },
             ]}
-            data={data150}
+            data={dataParkir}
             options={{
               search: true,
               width: '250px',
