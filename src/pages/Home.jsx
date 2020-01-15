@@ -168,13 +168,17 @@ export default function Home() {
   const classes = useStyles()
   let Xrecord = []
   let YDelay = []
-  const harga = []
-  const vip = []
-  const reg = []
+  let harga = []
+  let vip = []
+  let reg = []
   let hargaVIP = 0
   let hargaReg = 0
+  let durasi = []
+  let rateKedatangan = []
+  let lamda = []
   const [dataParkir, setDataParkir] = useState(null)
   const [dataPerform, setDataPerform] = useState(null)
+  const [dataOlahan, setDataOlahan] = useState(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -186,8 +190,13 @@ export default function Home() {
         'https://api-parkiran.herokuapp.com/api/v1/get-performance',
         { headers: { Authorization: `Bearer ${TOKEN}` } },
       )
+      const DataOlahan = await axios(
+        'https://api-parkir.herokuapp.com/api/v1/get-data-olahan',
+        { headers: { Authorization: `Bearer ${TOKEN}` } },
+      )
       setDataParkir(DataParkir.data)
       setDataPerform(DataPerform.data)
+      setDataOlahan(DataOlahan.data)
     }
 
     fetchData()
@@ -198,7 +207,9 @@ export default function Home() {
   if (dataPerform === null) {
     return <div>loading</div>
   }
-  console.log(dataPerform)
+  if (dataOlahan === null) {
+    return <div>loading</div>
+  }
   dataParkir.map(val => {
     harga.push(parseInt(val.harga_reservasi))
     if (val.jenis_parkiran === 'REG') {
@@ -215,6 +226,19 @@ export default function Home() {
     Xrecord.push(v.rate_kedatangan)
     YDelay.push(v.rata_rata_delay_antrian)
   })
+  dataOlahan.map(val => {
+    let tf = []
+    dataOlahan.map(res => {
+      if (res.durasi === val.durasi) {
+        tf.push(res.durasi)
+      }
+    })
+    const data = tf.length / val.durasi
+    rateKedatangan.push(data)
+    durasi.push(val.durasi)
+  })
+  rateKedatangan = Array.from(new Set(rateKedatangan))
+  console.log(rateKedatangan)
   const pieHarga = {
     labels: ['Reguler', 'VIP'],
     dataLabels: {
@@ -362,6 +386,82 @@ export default function Home() {
     },
   }
 
+  const olahData = {
+    chart: {
+      height: 350,
+      type: 'bar',
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'top', // top, center, bottom
+        },
+      },
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: function(val) {
+        return val
+      },
+      offsetY: -20,
+      style: {
+        fontSize: '12px',
+        colors: ['#304758'],
+      },
+    },
+
+    xaxis: {
+      categories: durasi,
+      position: 'bottom',
+      labels: {
+        offsetY: -18,
+      },
+      crosshairs: {
+        fill: {
+          type: 'gradient',
+          gradient: {
+            colorFrom: '#D8E3F0',
+            colorTo: '#BED1E6',
+            stops: [0, 100],
+            opacityFrom: 0.4,
+            opacityTo: 0.5,
+          },
+        },
+      },
+      tooltip: {
+        enabled: true,
+        offsetY: -35,
+      },
+    },
+    fill: {
+      gradient: {
+        shade: 'light',
+        type: 'horizontal',
+        shadeIntensity: 0.25,
+        gradientToColors: undefined,
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [50, 0, 100, 100],
+      },
+    },
+    yaxis: {
+      labels: {
+        show: true,
+        formatter: function(val) {
+          return val
+        },
+      },
+    },
+    title: {
+      text: 'Olah Data',
+      floating: true,
+      align: 'center',
+      style: {
+        color: '#444',
+      },
+    },
+  }
   return (
     <div style={{ marginTop: '50px' }}>
       <div className={classes.container}>
@@ -449,6 +549,21 @@ export default function Home() {
                   },
                 ]}
                 type='line'
+                className={classes.chartLine}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={12} style={{ marginTop: '10px' }}>
+            <Paper className={classes.rootLine}>
+              <Chart
+                options={olahData}
+                series={[
+                  {
+                    name: 'lamda',
+                    data: rateKedatangan,
+                  },
+                ]}
+                type='bar'
                 className={classes.chartLine}
               />
             </Paper>
