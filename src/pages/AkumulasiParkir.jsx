@@ -7,6 +7,7 @@ import axios from 'axios'
 import { TOKEN } from '../utils'
 import Denah from '../denah.png'
 import ImgsViewer from 'react-images-viewer'
+import Loading from './Loading'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -196,7 +197,7 @@ export default function AkumulasiParkir() {
   }, [])
 
   if (dataPerform === null) {
-    return <div>loading</div>
+    return <Loading />
   }
 
   dataPerform.map(v => {

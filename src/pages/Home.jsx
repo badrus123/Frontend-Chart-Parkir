@@ -5,6 +5,8 @@ import Chart from 'react-apexcharts'
 import MaterialTable from 'material-table'
 import axios from 'axios'
 import { TOKEN } from '../utils'
+import Loading from './Loading'
+
 const useStyles = makeStyles(theme => ({
   root: {
     [theme.breakpoints.down('sm')]: {
@@ -175,7 +177,6 @@ export default function Home() {
   let hargaReg = 0
   let durasi = []
   let rateKedatangan = []
-  let lamda = []
   const [dataParkir, setDataParkir] = useState(null)
   const [dataPerform, setDataPerform] = useState(null)
   const [dataOlahan, setDataOlahan] = useState(null)
@@ -202,13 +203,13 @@ export default function Home() {
     fetchData()
   }, [])
   if (dataParkir === null) {
-    return <div>loading</div>
+    return <Loading />
   }
   if (dataPerform === null) {
-    return <div>loading</div>
+    return <Loading />
   }
   if (dataOlahan === null) {
-    return <div>loading</div>
+    return <Loading />
   }
   dataParkir.map(val => {
     harga.push(parseInt(val.harga_reservasi))
@@ -238,7 +239,9 @@ export default function Home() {
     durasi.push(val.durasi)
   })
   rateKedatangan = Array.from(new Set(rateKedatangan))
-  console.log(rateKedatangan)
+  durasi = Array.from(new Set(durasi))
+
+  console.log(durasi)
   const pieHarga = {
     labels: ['Reguler', 'VIP'],
     dataLabels: {
@@ -413,9 +416,6 @@ export default function Home() {
     xaxis: {
       categories: durasi,
       position: 'bottom',
-      // labels: {
-      //   offsetY: -18,
-      // },
       crosshairs: {
         fill: {
           type: 'gradient',
