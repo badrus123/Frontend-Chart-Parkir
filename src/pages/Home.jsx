@@ -413,9 +413,9 @@ export default function Home() {
     xaxis: {
       categories: durasi,
       position: 'bottom',
-      labels: {
-        offsetY: -18,
-      },
+      // labels: {
+      //   offsetY: -18,
+      // },
       crosshairs: {
         fill: {
           type: 'gradient',
