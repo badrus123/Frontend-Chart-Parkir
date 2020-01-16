@@ -609,6 +609,40 @@ export default function Home() {
             title='Table User Parkir'
           />
         </div>
+        <div className={classes.table}>
+          <MaterialTable
+            columns={[
+              { title: 'nama', field: 'transaction_code' },
+              { title: 'Nomer Parkiran', field: 'id_parking' },
+              {
+                title: 'Waktu Datang',
+                field: 'jam_masuk',
+              },
+              {
+                title: 'Waktu Keluar',
+                field: 'jam_keluar',
+              },
+              {
+                title: 'Biaya Parkir',
+                field: 'pay',
+              },
+              {
+                title: 'Durasi',
+                field: 'durasi',
+              },
+            ]}
+            data={dataOlahan}
+            options={{
+              search: true,
+              width: '250px',
+              rowStyle: {
+                backgroundColor: '#EEE',
+              },
+              sorting: true,
+            }}
+            title='Table Olahan'
+          />
+        </div>
       </center>
     </div>
   )
